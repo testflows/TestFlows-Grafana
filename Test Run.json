@@ -1,0 +1,1697 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "$$hashKey": "object:164",
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 10,
+  "iteration": 1590866974337,
+  "links": [],
+  "panels": [
+    {
+      "content": "\n<div><a href=\"https://testflows.com\"><img src=\"https://raw.githubusercontent.com/testflows/TestFlows-ArtWork/master/images/logo_grafana.png\"></a></div>\n\n\n\n",
+      "datasource": null,
+      "gridPos": {
+        "h": 2,
+        "w": 3,
+        "x": 0,
+        "y": 0
+      },
+      "id": 21,
+      "mode": "html",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 2
+      },
+      "id": 39,
+      "title": "Name",
+      "type": "row"
+    },
+    {
+      "cacheTimeout": null,
+      "columns": [],
+      "datasource": null,
+      "fontSize": "100%",
+      "gridPos": {
+        "h": 2,
+        "w": 24,
+        "x": 0,
+        "y": 3
+      },
+      "id": 25,
+      "links": [],
+      "pageSize": null,
+      "pluginVersion": "6.7.0",
+      "showHeader": true,
+      "sort": {
+        "col": 0,
+        "desc": true
+      },
+      "styles": [
+        {
+          "alias": "Time",
+          "align": "auto",
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "pattern": "Time",
+          "type": "date"
+        },
+        {
+          "alias": " ",
+          "align": "left",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "/.*/",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "database": "default",
+          "dateColDataType": "message_date",
+          "dateLoading": false,
+          "dateTimeType": "DATETIME",
+          "datetimeLoading": false,
+          "format": "table",
+          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+          "hide": false,
+          "intervalFactor": 1,
+          "query": "SELECT\n    test_name AS test\nFROM $table\nWHERE test_id = '$test_id' AND message_keyword = 'TEST' LIMIT 1\n",
+          "rawQuery": "SELECT     toString(message_keyword) AS _keyword,     concat(upper(substr(_keyword,1,1)), lower(substr(_keyword,2,length(_keyword)-1))) AS Keyword,     concat(repeat('      ', message_level), multiIf(       message_keyword = 'PROTOCOL', protocol_version,       message_keyword = 'VERSION', framework_version,       message_keyword = 'TEST', test_name,       message_keyword = 'RESULT', toString(result_type),       message_keyword = 'ATTRIBUTE', concat(attribute_name, ', value: ', attribute_value),       message_keyword = 'TAG', tag_value,       message_keyword = 'ARGUMENT', concat(argument_name, ', value: ', argument_value),       message_keyword = 'REQUIREMENT', concat(requirement_name, ', version: ', requirement_version),       message_keyword = 'METRIC', concat(metric_name, ', value: ', toString(metric_value), ', units: ', metric_units),       message_keyword = 'TICKET', ticket_name,       message_keyword = 'VALUE', concat(value_name, ', value: ', value_value),       message_keyword in ('NONE', 'NOTE', 'DEBUG', 'EXCEPTION', 'INPUT','TRACE'), message,       message_keyword = 'EXAMPLE', concat(toString(example_row), ', columns: ',toString(example_columns), ', values: ', toString(example_values)),       message_keyword in ('NODE', 'MAP'), concat(node_name, ', module: ', node_module, ', next: ', toString(node_nexts), ', in: ', toString(node_ins), ', out: ', toString(node_outs)),       ''     )) AS Message,     message_rtime AS rtime,     toDateTime64(message_time,3) AS Time FROM default.messages WHERE test_id LIKE '/f03f241a-a208-11ea-99c9-2477034de0ec%' ORDER BY message_time, message_num",
+          "refId": "A",
+          "round": "0s",
+          "table": "messages",
+          "tableLoading": false
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "transform": "table",
+      "transparent": true,
+      "type": "table"
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 5
+      },
+      "id": 35,
+      "panels": [
+        {
+          "columns": [],
+          "datasource": null,
+          "fontSize": "100%",
+          "gridPos": {
+            "h": 5,
+            "w": 7,
+            "x": 0,
+            "y": 6
+          },
+          "id": 6,
+          "pageSize": null,
+          "showHeader": true,
+          "sort": {
+            "col": 0,
+            "desc": true
+          },
+          "styles": [
+            {
+              "alias": "Name",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "name",
+              "thresholds": [
+                ""
+              ],
+              "type": "string",
+              "unit": "short"
+            },
+            {
+              "alias": "Value",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "value",
+              "thresholds": [],
+              "type": "string",
+              "unit": "short"
+            },
+            {
+              "alias": "",
+              "align": "left",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "decimals": 2,
+              "pattern": "/.*/",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            }
+          ],
+          "targets": [
+            {
+              "database": "default",
+              "dateColDataType": "message_date",
+              "dateLoading": false,
+              "dateTimeType": "DATETIME",
+              "datetimeLoading": false,
+              "format": "table",
+              "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+              "hide": false,
+              "intervalFactor": 1,
+              "query": "SELECT\n   attribute_name AS name,\n   attribute_value AS value\nFROM $table\nWHERE test_id = '$test_id' AND message_keyword = 'ATTRIBUTE'",
+              "rawQuery": "SELECT     toString(message_keyword) AS _keyword,     concat(upper(substr(_keyword,1,1)), lower(substr(_keyword,2,length(_keyword)-1))) AS Keyword,     concat(repeat('      ', message_level), multiIf(       message_keyword = 'PROTOCOL', protocol_version,       message_keyword = 'VERSION', framework_version,       message_keyword = 'TEST', test_name,       message_keyword = 'RESULT', toString(result_type),       message_keyword = 'ATTRIBUTE', concat(attribute_name, ', value: ', attribute_value),       message_keyword = 'TAG', tag_value,       message_keyword = 'ARGUMENT', concat(argument_name, ', value: ', argument_value),       message_keyword = 'REQUIREMENT', concat(requirement_name, ', version: ', requirement_version),       message_keyword = 'METRIC', concat(metric_name, ', value: ', toString(metric_value), ', units: ', metric_units),       message_keyword = 'TICKET', ticket_name,       message_keyword = 'VALUE', concat(value_name, ', value: ', value_value),       message_keyword in ('NONE', 'NOTE', 'DEBUG', 'EXCEPTION', 'INPUT','TRACE'), message,       message_keyword = 'EXAMPLE', concat(toString(example_row), ', columns: ',toString(example_columns), ', values: ', toString(example_values)),       message_keyword in ('NODE', 'MAP'), concat(node_name, ', module: ', node_module, ', next: ', toString(node_nexts), ', in: ', toString(node_ins), ', out: ', toString(node_outs)),       ''     )) AS Message,     message_rtime AS rtime,     toDateTime64(message_time,3) AS Time FROM default.messages WHERE test_id LIKE '/4ebded10-a1db-11ea-99c9-2477034de0ec/0/0%' ORDER BY message_time, message_num",
+              "refId": "A",
+              "round": "0s",
+              "table": "messages",
+              "tableLoading": false
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Attributes",
+          "transform": "table",
+          "transparent": true,
+          "type": "table"
+        },
+        {
+          "columns": [],
+          "datasource": null,
+          "fontSize": "100%",
+          "gridPos": {
+            "h": 5,
+            "w": 7,
+            "x": 7,
+            "y": 6
+          },
+          "id": 30,
+          "pageSize": null,
+          "showHeader": true,
+          "sort": {
+            "col": 0,
+            "desc": true
+          },
+          "styles": [
+            {
+              "alias": "Value",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "value",
+              "thresholds": [],
+              "type": "string",
+              "unit": "short"
+            },
+            {
+              "alias": "",
+              "align": "left",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "decimals": 2,
+              "pattern": "/.*/",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            }
+          ],
+          "targets": [
+            {
+              "database": "default",
+              "dateColDataType": "message_date",
+              "dateLoading": false,
+              "dateTimeType": "DATETIME",
+              "datetimeLoading": false,
+              "format": "table",
+              "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+              "hide": false,
+              "intervalFactor": 1,
+              "query": "SELECT\n   tag_value AS value\nFROM $table\nWHERE test_id = '$test_id' AND message_keyword = 'TAG'",
+              "rawQuery": "SELECT    attribute_name AS name,    attribute_value AS value FROM default.messages WHERE test_id = '/f03f241a-a208-11ea-99c9-2477034de0ec' AND message_keyword = 'ATTRIBUTE'",
+              "refId": "A",
+              "round": "0s",
+              "table": "messages",
+              "tableLoading": false
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Tags",
+          "transform": "table",
+          "transparent": true,
+          "type": "table"
+        },
+        {
+          "columns": [],
+          "datasource": null,
+          "fontSize": "100%",
+          "gridPos": {
+            "h": 4,
+            "w": 14,
+            "x": 0,
+            "y": 11
+          },
+          "id": 31,
+          "pageSize": null,
+          "showHeader": true,
+          "sort": {
+            "col": 1,
+            "desc": false
+          },
+          "styles": [
+            {
+              "alias": "Name",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "name",
+              "thresholds": [
+                ""
+              ],
+              "type": "string",
+              "unit": "short"
+            },
+            {
+              "alias": "Version",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "version",
+              "thresholds": [],
+              "type": "string",
+              "unit": "short"
+            },
+            {
+              "alias": "",
+              "align": "left",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "decimals": 2,
+              "pattern": "/.*/",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            }
+          ],
+          "targets": [
+            {
+              "database": "default",
+              "dateColDataType": "message_date",
+              "dateLoading": false,
+              "dateTimeType": "DATETIME",
+              "datetimeLoading": false,
+              "format": "table",
+              "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+              "hide": false,
+              "intervalFactor": 1,
+              "query": "SELECT\n   requirement_name AS name,\n   requirement_version AS version\nFROM $table\nWHERE test_id = '$test_id' AND message_keyword = 'REQUIREMENT'",
+              "rawQuery": "SELECT    requirement_name AS name,    requirement_version AS version FROM default.messages WHERE test_id = '/f03f241a-a208-11ea-99c9-2477034de0ec' AND message_keyword = 'REQUIREMENT'",
+              "refId": "A",
+              "round": "0s",
+              "table": "messages",
+              "tableLoading": false
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Requirements",
+          "transform": "table",
+          "transparent": true,
+          "type": "table"
+        }
+      ],
+      "title": "Properties",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 6
+      },
+      "id": 33,
+      "panels": [],
+      "title": "Summary",
+      "type": "row"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 0,
+        "y": 7
+      },
+      "id": 19,
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "first"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "rgb(219, 221, 224)",
+                  "value": null
+                }
+              ]
+            },
+            "title": "Total"
+          },
+          "limit": 1,
+          "overrides": [],
+          "values": true
+        },
+        "orientation": "auto",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "6.7.0",
+      "targets": [
+        {
+          "database": "default",
+          "dateColDataType": "message_date",
+          "dateLoading": false,
+          "dateTimeType": "DATETIME",
+          "datetimeLoading": false,
+          "format": "table",
+          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+          "hide": false,
+          "intervalFactor": 1,
+          "query": "SELECT\n  count()\nFROM $table\nWHERE test_parent = '$test_id' AND message_keyword = 'RESULT'",
+          "rawQuery": "SELECT   count() FROM default.messages WHERE test_parent = '/aaefb378-a1e2-11ea-99c9-2477034de0ec/1' AND message_keyword = 'RESULT'",
+          "refId": "A",
+          "round": "0s",
+          "table": "messages",
+          "tableLoading": false
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 3,
+        "y": 7
+      },
+      "id": 14,
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "first"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "title": "OK"
+          },
+          "limit": 1,
+          "overrides": [],
+          "values": true
+        },
+        "orientation": "auto",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "6.7.0",
+      "targets": [
+        {
+          "database": "default",
+          "dateColDataType": "message_date",
+          "dateLoading": false,
+          "dateTimeType": "DATETIME",
+          "datetimeLoading": false,
+          "format": "table",
+          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+          "hide": false,
+          "intervalFactor": 1,
+          "query": "SELECT\n  count()\nFROM $table\nWHERE test_parent = '$test_id' AND message_keyword = 'RESULT' AND result_type = 'OK'",
+          "rawQuery": "SELECT   count() FROM default.messages WHERE test_parent = '/aaefb378-a1e2-11ea-99c9-2477034de0ec/1' AND message_keyword = 'RESULT' AND result_type = 'OK'",
+          "refId": "A",
+          "round": "0s",
+          "table": "messages",
+          "tableLoading": false
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 6,
+        "y": 7
+      },
+      "id": 15,
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "first"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "light-red",
+                  "value": null
+                }
+              ]
+            },
+            "title": "Fail"
+          },
+          "limit": 1,
+          "overrides": [],
+          "values": true
+        },
+        "orientation": "auto",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "6.7.0",
+      "targets": [
+        {
+          "database": "default",
+          "dateColDataType": "message_date",
+          "dateLoading": false,
+          "dateTimeType": "DATETIME",
+          "datetimeLoading": false,
+          "format": "table",
+          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+          "hide": false,
+          "intervalFactor": 1,
+          "query": "SELECT\n  count()\nFROM $table\nWHERE test_parent = '$test_id' AND message_keyword = 'RESULT' AND result_type = 'Fail'",
+          "rawQuery": "SELECT   count() FROM default.messages WHERE test_parent = '/aaefb378-a1e2-11ea-99c9-2477034de0ec/1' AND message_keyword = 'RESULT' AND result_type = 'Fail'",
+          "refId": "A",
+          "round": "0s",
+          "table": "messages",
+          "tableLoading": false
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 9,
+        "y": 7
+      },
+      "id": 16,
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "first"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "light-yellow",
+                  "value": null
+                }
+              ]
+            },
+            "title": "Error"
+          },
+          "limit": 1,
+          "overrides": [],
+          "values": true
+        },
+        "orientation": "auto",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "6.7.0",
+      "targets": [
+        {
+          "database": "default",
+          "dateColDataType": "message_date",
+          "dateLoading": false,
+          "dateTimeType": "DATETIME",
+          "datetimeLoading": false,
+          "format": "table",
+          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+          "hide": false,
+          "intervalFactor": 1,
+          "query": "SELECT\n  count()\nFROM $table\nWHERE test_parent = '$test_id' AND message_keyword = 'RESULT' AND result_type = 'Error'",
+          "rawQuery": "SELECT   count() FROM default.messages WHERE test_parent = '/aaefb378-a1e2-11ea-99c9-2477034de0ec/1' AND message_keyword = 'RESULT' AND result_type = 'Error'",
+          "refId": "A",
+          "round": "0s",
+          "table": "messages",
+          "tableLoading": false
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 12,
+        "y": 7
+      },
+      "id": 17,
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "first"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "light-blue",
+                  "value": null
+                }
+              ]
+            },
+            "title": "Known"
+          },
+          "limit": 1,
+          "overrides": [],
+          "values": true
+        },
+        "orientation": "auto",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "6.7.0",
+      "targets": [
+        {
+          "database": "default",
+          "dateColDataType": "message_date",
+          "dateLoading": false,
+          "dateTimeType": "DATETIME",
+          "datetimeLoading": false,
+          "format": "table",
+          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+          "hide": false,
+          "intervalFactor": 1,
+          "query": "SELECT\n  count()\nFROM $table\nWHERE test_parent = '$test_id' AND message_keyword = 'RESULT' AND result_type IN ('XOK', 'XFail', 'XError', 'XNull')",
+          "rawQuery": "SELECT   count() FROM default.messages WHERE test_parent = '/aaefb378-a1e2-11ea-99c9-2477034de0ec/1' AND message_keyword = 'RESULT' AND result_type IN ('XOK', 'XFail', 'XError', 'XNull')",
+          "refId": "A",
+          "round": "0s",
+          "table": "messages",
+          "tableLoading": false
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 15,
+        "y": 7
+      },
+      "id": 18,
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "first"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "rgb(81, 82, 84)",
+                  "value": null
+                }
+              ]
+            },
+            "title": "Other"
+          },
+          "limit": 1,
+          "overrides": [],
+          "values": true
+        },
+        "orientation": "auto",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "6.7.0",
+      "targets": [
+        {
+          "database": "default",
+          "dateColDataType": "message_date",
+          "dateLoading": false,
+          "dateTimeType": "DATETIME",
+          "datetimeLoading": false,
+          "format": "table",
+          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+          "hide": false,
+          "intervalFactor": 1,
+          "query": "SELECT\n  count()\nFROM $table\nWHERE test_parent = '$test_id' AND message_keyword = 'RESULT' AND result_type IN ('Skip', 'Null')",
+          "rawQuery": "SELECT     test,     metric.1 AS name,     metric.2 AS value,     metric.3 AS units FROM (     SELECT         test,         arrayJoin(metric) AS metric     FROM     (         SELECT             test,             arrayZip(name, value, units) AS metric         FROM         (             SELECT                 anyIf(test_name, test_name != '') AS test,                 groupArray(metric_name) AS name,                 groupArray(metric_value) AS value,                 groupArray(metric_units) AS units             FROM messages             WHERE test_id LIKE '/aaefb378-a1e2-11ea-99c9-2477034de0ec/1%' AND message_keyword IN ('TEST', 'METRIC')             GROUP BY test_key         )     ) ) WHERE name != ''",
+          "refId": "A",
+          "round": "0s",
+          "table": "messages",
+          "tableLoading": false
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 11
+      },
+      "id": 27,
+      "panels": [
+        {
+          "columns": [],
+          "datasource": null,
+          "fontSize": "100%",
+          "gridPos": {
+            "h": 4,
+            "w": 24,
+            "x": 0,
+            "y": 21
+          },
+          "id": 4,
+          "pageSize": null,
+          "showHeader": true,
+          "sort": {
+            "col": 0,
+            "desc": true
+          },
+          "styles": [
+            {
+              "alias": "Test Name",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "test",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            },
+            {
+              "alias": "Name",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "name",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            },
+            {
+              "alias": "Value",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "value",
+              "thresholds": [],
+              "type": "string",
+              "unit": "short"
+            },
+            {
+              "alias": "Units",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "units",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            },
+            {
+              "alias": "",
+              "align": "left",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "decimals": 2,
+              "pattern": "/.*/",
+              "thresholds": [],
+              "type": "string",
+              "unit": "short"
+            }
+          ],
+          "targets": [
+            {
+              "database": "default",
+              "dateColDataType": "",
+              "dateLoading": false,
+              "dateTimeType": "DATETIME",
+              "datetimeLoading": false,
+              "format": "table",
+              "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+              "hide": false,
+              "intervalFactor": 1,
+              "query": "SELECT\n    test,\n    metric.1 AS name,\n    metric.2 AS value,\n    metric.3 AS units\nFROM\n(\n    SELECT\n        test,\n        arrayJoin(metric) AS metric\n    FROM\n    (\n        SELECT\n            test,\n            arrayZip(name, value, units) AS metric\n        FROM\n        (\n            SELECT\n                anyIf(test_name, test_name != '') AS test,\n                groupArray(metric_name) AS name,\n                groupArray(metric_value) AS value,\n                groupArray(metric_units) AS units\n            FROM messages\n            WHERE test_id LIKE '$test_id%' AND message_keyword IN ('TEST', 'METRIC')\n            GROUP BY test_key\n        )\n    )\n)\nWHERE name != ''\n",
+              "rawQuery": "SELECT    requirement_name AS name,    requirement_version AS version FROM default.messages WHERE test_id = '/f03f241a-a208-11ea-99c9-2477034de0ec' AND message_keyword = 'REQUIREMENT'",
+              "refId": "A",
+              "round": "0s",
+              "table": "messages",
+              "tableLoading": false
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "",
+          "transform": "table",
+          "transparent": true,
+          "type": "table"
+        }
+      ],
+      "title": "Metrics",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 12
+      },
+      "id": 23,
+      "panels": [
+        {
+          "columns": [],
+          "datasource": null,
+          "fontSize": "100%",
+          "gridPos": {
+            "h": 4,
+            "w": 24,
+            "x": 0,
+            "y": 22
+          },
+          "id": 36,
+          "pageSize": null,
+          "showHeader": true,
+          "sort": {
+            "col": 0,
+            "desc": true
+          },
+          "styles": [
+            {
+              "alias": "Test Name",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "test",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            },
+            {
+              "alias": "Name",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "name",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            },
+            {
+              "alias": "Value",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "value",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            },
+            {
+              "alias": "Units",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "units",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            },
+            {
+              "alias": "",
+              "align": "left",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "decimals": 2,
+              "pattern": "/.*/",
+              "thresholds": [],
+              "type": "string",
+              "unit": "short"
+            }
+          ],
+          "targets": [
+            {
+              "database": "default",
+              "dateColDataType": "",
+              "dateLoading": false,
+              "dateTimeType": "DATETIME",
+              "datetimeLoading": false,
+              "format": "table",
+              "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+              "hide": false,
+              "intervalFactor": 1,
+              "query": "SELECT\n    test,\n    requirement.1 AS name,\n    requirement.2 AS Version,\n    requirement.3 AS Description,\n    requirement.4 AS Link\nFROM\n(\n    SELECT\n        test,\n        arrayJoin(requirement) AS requirement\n    FROM\n    (\n        SELECT\n            test,\n            arrayZip(name, version, description, link) AS requirement\n        FROM\n        (\n            SELECT\n                anyIf(test_name, test_name != '') AS test,\n                groupArray(requirement_name) AS name,\n                groupArray(requirement_version) AS version,\n                groupArray(requirement_description) AS description,\n                groupArray(requirement_link) AS link\n            FROM messages\n            WHERE test_id LIKE '$test_id%' AND message_keyword IN ('TEST', 'REQUIREMENT')\n            GROUP BY test_key\n        )\n    )\n)\nWHERE name != ''\n",
+              "rawQuery": "SELECT     test,     metric.1 AS name,     metric.2 AS value,     metric.3 AS units FROM (     SELECT         test,         arrayJoin(metric) AS metric     FROM     (         SELECT             test,             arrayZip(name, value, units) AS metric         FROM         (             SELECT                 anyIf(test_name, test_name != '') AS test,                 groupArray(metric_name) AS name,                 groupArray(metric_value) AS value,                 groupArray(metric_units) AS units             FROM messages             WHERE test_id LIKE '/f03f241a-a208-11ea-99c9-2477034de0ec%' AND message_keyword IN ('TEST', 'METRIC')             GROUP BY test_key         )     ) ) WHERE name != ''",
+              "refId": "A",
+              "round": "0s",
+              "table": "messages",
+              "tableLoading": false
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "",
+          "transform": "table",
+          "transparent": true,
+          "type": "table"
+        }
+      ],
+      "title": "Requirements",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 13
+      },
+      "id": 12,
+      "panels": [
+        {
+          "columns": [],
+          "datasource": null,
+          "fontSize": "100%",
+          "gridPos": {
+            "h": 4,
+            "w": 24,
+            "x": 0,
+            "y": 23
+          },
+          "id": 37,
+          "pageSize": null,
+          "showHeader": true,
+          "sort": {
+            "col": 0,
+            "desc": true
+          },
+          "styles": [
+            {
+              "alias": "Test Name",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "test",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            },
+            {
+              "alias": "Name",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "name",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            },
+            {
+              "alias": "Link",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "link",
+              "thresholds": [],
+              "type": "string",
+              "unit": "short"
+            },
+            {
+              "alias": "Units",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "units",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            },
+            {
+              "alias": "",
+              "align": "left",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "decimals": 2,
+              "pattern": "/.*/",
+              "thresholds": [],
+              "type": "string",
+              "unit": "short"
+            }
+          ],
+          "targets": [
+            {
+              "database": "default",
+              "dateColDataType": "",
+              "dateLoading": false,
+              "dateTimeType": "DATETIME",
+              "datetimeLoading": false,
+              "format": "table",
+              "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+              "hide": false,
+              "intervalFactor": 1,
+              "query": "SELECT\n    test,\n    ticket.1 AS name,\n    ticket.2 AS link\nFROM\n(\n    SELECT\n        test,\n        arrayJoin(ticket) AS ticket\n    FROM\n    (\n        SELECT\n            test,\n            arrayZip(name, link) AS ticket\n        FROM\n        (\n            SELECT\n                anyIf(test_name, test_name != '') AS test,\n                groupArray(ticket_name) AS name,\n                groupArray(ticket_link) AS link\n            FROM messages\n            WHERE test_id LIKE '$test_id%' AND message_keyword IN ('TEST', 'TICKET')\n            GROUP BY test_key\n        )\n    )\n)\nWHERE name != ''\n",
+              "rawQuery": "SELECT     test,     metric.1 AS name,     metric.2 AS value,     metric.3 AS units FROM (     SELECT         test,         arrayJoin(metric) AS metric     FROM     (         SELECT             test,             arrayZip(name, value, units) AS metric         FROM         (             SELECT                 anyIf(test_name, test_name != '') AS test,                 groupArray(metric_name) AS name,                 groupArray(metric_value) AS value,                 groupArray(metric_units) AS units             FROM messages             WHERE test_id LIKE '/f03f241a-a208-11ea-99c9-2477034de0ec%' AND message_keyword IN ('TEST', 'METRIC')             GROUP BY test_key         )     ) ) WHERE name != ''",
+              "refId": "A",
+              "round": "0s",
+              "table": "messages",
+              "tableLoading": false
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "",
+          "transform": "table",
+          "transparent": true,
+          "type": "table"
+        }
+      ],
+      "title": "Tickets",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 14
+      },
+      "id": 10,
+      "panels": [],
+      "title": "Tests",
+      "type": "row"
+    },
+    {
+      "columns": [],
+      "datasource": null,
+      "fontSize": "100%",
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 15
+      },
+      "id": 2,
+      "pageSize": null,
+      "showHeader": true,
+      "sort": {
+        "col": 3,
+        "desc": false
+      },
+      "styles": [
+        {
+          "$$hashKey": "object:899",
+          "alias": "Time",
+          "align": "auto",
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "pattern": "Time",
+          "type": "date"
+        },
+        {
+          "$$hashKey": "object:900",
+          "alias": "Test Name",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "link": true,
+          "linkTargetBlank": false,
+          "linkTooltip": "$__cell_0",
+          "linkUrl": "/d/DGNHz-kJz/test-run-details?orgId=1&var-test_id=$__cell_4",
+          "mappingType": 1,
+          "pattern": "name",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "$$hashKey": "object:901",
+          "alias": "Duration",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "duration",
+          "thresholds": [],
+          "type": "number",
+          "unit": "s"
+        },
+        {
+          "$$hashKey": "object:902",
+          "alias": "Result",
+          "align": "center",
+          "colorMode": "cell",
+          "colors": [
+            "grey",
+            "green",
+            "red",
+            "yellow",
+            "cyan",
+            "grey",
+            "blue"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "result",
+          "preserveFormat": false,
+          "sanitize": false,
+          "thresholds": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "type": "string",
+          "unit": "short",
+          "valueMaps": [
+            {
+              "$$hashKey": "object:991",
+              "text": "OK",
+              "value": "1"
+            },
+            {
+              "$$hashKey": "object:992",
+              "text": "Fail",
+              "value": "2"
+            },
+            {
+              "$$hashKey": "object:993",
+              "text": "Error",
+              "value": "3"
+            },
+            {
+              "$$hashKey": "object:994",
+              "text": "Null",
+              "value": "4"
+            },
+            {
+              "$$hashKey": "object:995",
+              "text": "Skip",
+              "value": "5"
+            },
+            {
+              "$$hashKey": "object:996",
+              "text": "XOK",
+              "value": "6"
+            },
+            {
+              "$$hashKey": "object:997",
+              "text": "XFail",
+              "value": "7"
+            },
+            {
+              "$$hashKey": "object:998",
+              "text": "XError",
+              "value": "8"
+            },
+            {
+              "$$hashKey": "object:999",
+              "text": "XNull",
+              "value": "9"
+            }
+          ]
+        },
+        {
+          "$$hashKey": "object:903",
+          "alias": "",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 4,
+          "mappingType": 1,
+          "pattern": "time",
+          "thresholds": [],
+          "type": "hidden",
+          "unit": "none"
+        },
+        {
+          "$$hashKey": "object:904",
+          "alias": "",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "test_id",
+          "thresholds": [],
+          "type": "hidden",
+          "unit": "short"
+        },
+        {
+          "$$hashKey": "object:905",
+          "alias": "",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "test_id_key",
+          "thresholds": [],
+          "type": "hidden",
+          "unit": "short"
+        },
+        {
+          "$$hashKey": "object:906",
+          "alias": "",
+          "align": "left",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "/.*/",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "database": "default",
+          "dateColDataType": "message_date",
+          "dateLoading": false,
+          "dateTimeColDataType": "toDateTime(message_time)",
+          "dateTimeType": "DATETIME",
+          "datetimeLoading": false,
+          "format": "table",
+          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+          "hide": false,
+          "intervalFactor": 1,
+          "query": "SELECT\n    anyIf(test_name, test_name != '') AS name,\n    toUInt8(anyIf(result_type, result_type != '')) AS result,\n    max(message_rtime) AS duration,\n    max(message_time) AS time,\n    test_id\nFROM messages\nWHERE test_parent = '$test_id' AND message_keyword IN ('TEST', 'RESULT') AND if('$show_steps' != 'True' , test_type >= 20, 1) \nGROUP BY test_id\nORDER BY time, test_id DESC\n",
+          "rawQuery": "SELECT     toString(message_keyword) AS _keyword,     concat(upper(substr(_keyword,1,1)), lower(substr(_keyword,2,length(_keyword)-1))) AS Keyword,     concat(repeat('      ', message_level), multiIf(       message_keyword = 'PROTOCOL', protocol_version,       message_keyword = 'VERSION', framework_version,       message_keyword = 'TEST', test_name,       message_keyword = 'RESULT', toString(result_type),       message_keyword = 'ATTRIBUTE', concat(attribute_name, ', value: ', attribute_value),       message_keyword = 'TAG', tag_value,       message_keyword = 'ARGUMENT', concat(argument_name, ', value: ', argument_value),       message_keyword = 'REQUIREMENT', concat(requirement_name, ', version: ', requirement_version),       message_keyword = 'METRIC', concat(metric_name, ', value: ', toString(metric_value), ', units: ', metric_units),       message_keyword = 'TICKET', ticket_name,       message_keyword = 'VALUE', concat(value_name, ', value: ', value_value),       message_keyword in ('NONE', 'NOTE', 'DEBUG', 'EXCEPTION', 'INPUT','TRACE'), message,       message_keyword = 'EXAMPLE', concat(toString(example_row), ', columns: ',toString(example_columns), ', values: ', toString(example_values)),       message_keyword in ('NODE', 'MAP'), concat(node_name, ', module: ', node_module, ', next: ', toString(node_nexts), ', in: ', toString(node_ins), ', out: ', toString(node_outs)),       ''     )) AS Message,     toDateTime64(message_time,3) AS Time FROM default.messages WHERE test_id LIKE '/aaefb378-a1e2-11ea-99c9-2477034de0ec/1%' ORDER BY message_time, message_num",
+          "refId": "A",
+          "round": "0s",
+          "table": "messages",
+          "tableLoading": false
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "transform": "table",
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 21
+      },
+      "id": 8,
+      "panels": [],
+      "title": "Messages",
+      "type": "row"
+    },
+    {
+      "columns": [],
+      "datasource": null,
+      "fontSize": "90%",
+      "gridPos": {
+        "h": 23,
+        "w": 24,
+        "x": 0,
+        "y": 22
+      },
+      "id": 29,
+      "pageSize": 100,
+      "showHeader": true,
+      "sort": {
+        "col": null,
+        "desc": false
+      },
+      "styles": [
+        {
+          "alias": "",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss.SSS",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "Time",
+          "thresholds": [],
+          "type": "date",
+          "unit": "s"
+        },
+        {
+          "alias": "",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "Message",
+          "preserveFormat": true,
+          "sanitize": false,
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "_keyword",
+          "thresholds": [],
+          "type": "hidden",
+          "unit": "short"
+        },
+        {
+          "alias": "Test Time",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "rtime",
+          "thresholds": [],
+          "type": "number",
+          "unit": "s"
+        },
+        {
+          "alias": "",
+          "align": "left",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "/.*/",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "database": "default",
+          "dateColDataType": "message_date",
+          "dateLoading": false,
+          "dateTimeColDataType": "toDateTime(message_time)",
+          "dateTimeType": "DATETIME",
+          "datetimeLoading": false,
+          "format": "table",
+          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+          "hide": false,
+          "intervalFactor": 1,
+          "query": "SELECT\n    toString(message_keyword) AS _keyword,\n    concat(upper(substr(_keyword,1,1)), lower(substr(_keyword,2,length(_keyword)-1))) AS Keyword,\n    concat(repeat('      ', message_level), multiIf(\n      message_keyword = 'PROTOCOL', protocol_version,\n      message_keyword = 'VERSION', framework_version,\n      message_keyword = 'TEST', test_name,\n      message_keyword = 'RESULT', toString(result_type),\n      message_keyword = 'ATTRIBUTE', concat(attribute_name, ', value: ', attribute_value),\n      message_keyword = 'TAG', tag_value,\n      message_keyword = 'ARGUMENT', concat(argument_name, ', value: ', argument_value),\n      message_keyword = 'REQUIREMENT', concat(requirement_name, ', version: ', requirement_version),\n      message_keyword = 'METRIC', concat(metric_name, ', value: ', toString(metric_value), ', units: ', metric_units),\n      message_keyword = 'TICKET', ticket_name,\n      message_keyword = 'VALUE', concat(value_name, ', value: ', value_value),\n      message_keyword in ('NONE', 'NOTE', 'DEBUG', 'EXCEPTION', 'INPUT','TRACE'), message,\n      message_keyword = 'EXAMPLE', concat(toString(example_row), ', columns: ',toString(example_columns), ', values: ', toString(example_values)),\n      message_keyword in ('NODE', 'MAP'), concat(node_name, ', module: ', node_module, ', next: ', toString(node_nexts), ', in: ', toString(node_ins), ', out: ', toString(node_outs)),\n      ''\n    )) AS Message,\n    message_rtime AS rtime,\n    toDateTime64(message_time,3) AS Time\nFROM $table\nWHERE test_id LIKE '$test_id%'\nORDER BY message_time, message_num",
+          "rawQuery": "SELECT     toString(message_keyword) AS _keyword,     concat(upper(substr(_keyword,1,1)), lower(substr(_keyword,2,length(_keyword)-1))) AS Keyword,     concat(repeat('      ', message_level), multiIf(       message_keyword = 'PROTOCOL', protocol_version,       message_keyword = 'VERSION', framework_version,       message_keyword = 'TEST', test_name,       message_keyword = 'RESULT', toString(result_type),       message_keyword = 'ATTRIBUTE', concat(attribute_name, ', value: ', attribute_value),       message_keyword = 'TAG', tag_value,       message_keyword = 'ARGUMENT', concat(argument_name, ', value: ', argument_value),       message_keyword = 'REQUIREMENT', concat(requirement_name, ', version: ', requirement_version),       message_keyword = 'METRIC', concat(metric_name, ', value: ', toString(metric_value), ', units: ', metric_units),       message_keyword = 'TICKET', ticket_name,       message_keyword = 'VALUE', concat(value_name, ', value: ', value_value),       message_keyword in ('NONE', 'NOTE', 'DEBUG', 'EXCEPTION', 'INPUT','TRACE'), message,       message_keyword = 'EXAMPLE', concat(toString(example_row), ', columns: ',toString(example_columns), ', values: ', toString(example_values)),       message_keyword in ('NODE', 'MAP'), concat(node_name, ', module: ', node_module, ', next: ', toString(node_nexts), ', in: ', toString(node_ins), ', out: ', toString(node_outs)),       ''     )) AS Message,     message_rtime AS rtime,     toDateTime64(message_time,3) AS Time FROM default.messages WHERE test_id LIKE '/4ebded10-a1db-11ea-99c9-2477034de0ec/0/0%' ORDER BY message_time, message_num",
+          "refId": "A",
+          "round": "0s",
+          "table": "messages",
+          "tableLoading": false
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "transform": "table",
+      "transparent": true,
+      "type": "table"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 22,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "none",
+          "value": "none"
+        },
+        "hide": 0,
+        "label": "id",
+        "name": "test_id",
+        "options": [
+          {
+            "selected": true,
+            "text": "none",
+            "value": "none"
+          }
+        ],
+        "query": "none",
+        "skipUrlSync": false,
+        "type": "textbox"
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": "True",
+          "value": "True"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "show steps",
+        "multi": false,
+        "name": "show_steps",
+        "options": [
+          {
+            "selected": true,
+            "text": "True",
+            "value": "True"
+          },
+          {
+            "selected": false,
+            "text": "False",
+            "value": "False"
+          }
+        ],
+        "query": "True, False",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "",
+  "title": "Test Run",
+  "uid": "oDIoHPkMk",
+  "variables": {
+    "list": []
+  },
+  "version": 3
+}

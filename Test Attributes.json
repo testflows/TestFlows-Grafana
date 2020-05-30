@@ -1,0 +1,141 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "$$hashKey": "object:1197",
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 6,
+  "links": [],
+  "panels": [
+    {
+      "content": "\n<div><a href=\"https://testflows.com\"><img src=\"https://raw.githubusercontent.com/testflows/TestFlows-ArtWork/master/images/logo_grafana.png\"></a></div>\n\n\n\n",
+      "datasource": null,
+      "gridPos": {
+        "h": 2,
+        "w": 3,
+        "x": 0,
+        "y": 0
+      },
+      "id": 4,
+      "mode": "html",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "columns": [],
+      "datasource": null,
+      "fontSize": "100%",
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 2
+      },
+      "id": 2,
+      "pageSize": null,
+      "showHeader": true,
+      "sort": {
+        "col": 0,
+        "desc": true
+      },
+      "styles": [
+        {
+          "$$hashKey": "object:2054",
+          "alias": "Name",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "link": true,
+          "linkTooltip": "$__cell_0",
+          "linkUrl": "/d/04ZXifzGz/test-attribute?orgId=1&var-name=$__cell_0",
+          "mappingType": 1,
+          "pattern": "name",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "$$hashKey": "object:1301",
+          "alias": "",
+          "align": "left",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "/.*/",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "database": "default",
+          "dateColDataType": "message_date",
+          "dateLoading": false,
+          "dateTimeColDataType": "toDateTime(message_time)",
+          "dateTimeType": "DATETIME",
+          "datetimeLoading": false,
+          "format": "table",
+          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+          "hide": false,
+          "intervalFactor": 1,
+          "query": "SELECT\n    attribute_name AS name\nFROM $table\nWHERE test_istop = 1 AND message_keyword = 'ATTRIBUTE'\nGROUP BY name\n",
+          "rawQuery": "SELECT     attribute_name AS name FROM default.messages WHERE test_istop = 1 AND message_keyword = 'ATTRIBUTE' GROUP BY name",
+          "refId": "A",
+          "round": "0s",
+          "table": "messages",
+          "tableLoading": false
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Test Attributes",
+      "transform": "table",
+      "transparent": true,
+      "type": "table"
+    }
+  ],
+  "schemaVersion": 22,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Test Attributes",
+  "uid": "z18xiBzGk",
+  "variables": {
+    "list": []
+  },
+  "version": 5
+}

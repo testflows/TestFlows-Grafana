@@ -1,0 +1,862 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "$$hashKey": "object:63",
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 2,
+  "iteration": 1590866886350,
+  "links": [],
+  "panels": [
+    {
+      "content": "\n<div><a href=\"https://testflows.com\"><img src=\"https://raw.githubusercontent.com/testflows/TestFlows-ArtWork/master/images/logo_grafana.png\"></a></div>\n\n\n\n",
+      "datasource": null,
+      "gridPos": {
+        "h": 2,
+        "w": 3,
+        "x": 0,
+        "y": 0
+      },
+      "id": 11,
+      "mode": "html",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 2
+      },
+      "id": 15,
+      "panels": [],
+      "title": "Totals",
+      "type": "row"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": null,
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 0,
+        "y": 3
+      },
+      "id": 4,
+      "links": [],
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "defaults": {
+            "mappings": [
+              {
+                "$$hashKey": "object:142",
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "rgb(176, 176, 176)",
+                  "value": null
+                }
+              ]
+            },
+            "title": "Total",
+            "unit": "none"
+          },
+          "overrides": [],
+          "values": false
+        },
+        "orientation": "horizontal",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "6.7.0",
+      "targets": [
+        {
+          "database": "default",
+          "dateColDataType": "message_date",
+          "dateLoading": false,
+          "dateTimeColDataType": "toDateTime(message_time)",
+          "dateTimeType": "DATETIME",
+          "datetimeLoading": false,
+          "format": "table",
+          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+          "hide": false,
+          "intervalFactor": 1,
+          "query": "SELECT\n  count()\nFROM $table\nWHERE $timeFilter \nAND test_id IN \n(\n  SELECT DISTINCT test_id\n     FROM messages\n     WHERE test_istop = 1 AND message_keyword IN ('TEST', 'ATTRIBUTE') AND concat(attribute_name, ': ', attribute_value) IN ($attribute) \n)\nAND test_id IN \n(\n  SELECT DISTINCT test_id\n     FROM messages\n     WHERE test_istop = 1 AND message_keyword IN ('TEST', 'TAG') AND tag_value IN ($tag) \n)\nAND test_id IN \n(\n  SELECT DISTINCT test_id\n     FROM messages\n     WHERE test_istop = 1 AND message_keyword IN ('TEST', 'REQUIREMENT') AND requirement_name IN ($requirement) \n)\nAND message_keyword = 'RESULT'\n",
+          "rawQuery": "SELECT   count() FROM default.messages WHERE message_date >= toDate(1590249301) AND toDateTime(message_time) >= toDateTime(1590249301)  AND test_id IN  (   SELECT DISTINCT test_id      FROM messages      WHERE test_istop = 1 AND message_keyword IN ('TEST', 'ATTRIBUTE') AND concat(attribute_name, ': ', attribute_value) IN ('name2: value2','job.id: 1234','build: 1234','build: 123','build: 10',': ')  ) AND test_id IN  (   SELECT DISTINCT test_id      FROM messages      WHERE test_istop = 1 AND message_keyword IN ('TEST', 'TAG') AND tag_value IN ('','tag0','tag1')  ) AND test_id IN  (   SELECT DISTINCT test_id      FROM messages      WHERE test_istop = 1 AND message_keyword IN ('TEST', 'REQUIREMENT') AND requirement_name IN ('','RQ1')  ) AND message_keyword = 'RESULT'",
+          "refId": "A",
+          "round": "0s",
+          "table": "messages",
+          "tableLoading": false
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": null,
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 3,
+        "y": 3
+      },
+      "id": 5,
+      "links": [],
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "last"
+          ],
+          "defaults": {
+            "mappings": [
+              {
+                "$$hashKey": "object:142",
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "light-green",
+                  "value": null
+                }
+              ]
+            },
+            "title": "OK",
+            "unit": "none"
+          },
+          "overrides": [],
+          "values": false
+        },
+        "orientation": "horizontal",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "6.7.0",
+      "targets": [
+        {
+          "database": "default",
+          "dateColDataType": "message_date",
+          "dateLoading": false,
+          "dateTimeColDataType": "toDateTime(message_time)",
+          "dateTimeType": "DATETIME",
+          "datetimeLoading": false,
+          "format": "table",
+          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+          "hide": false,
+          "intervalFactor": 1,
+          "query": "SELECT\n  count()\nFROM $table\nWHERE $timeFilter \nAND test_id IN \n(\n  SELECT DISTINCT test_id\n     FROM messages\n     WHERE test_istop = 1 AND message_keyword IN ('TEST', 'ATTRIBUTE') AND concat(attribute_name, ': ', attribute_value) IN ($attribute) \n)\nAND test_id IN \n(\n  SELECT DISTINCT test_id\n     FROM messages\n     WHERE test_istop = 1 AND message_keyword IN ('TEST', 'TAG') AND tag_value IN ($tag) \n)\nAND test_id IN \n(\n  SELECT DISTINCT test_id\n     FROM messages\n     WHERE test_istop = 1 AND message_keyword IN ('TEST', 'REQUIREMENT') AND requirement_name IN ($requirement) \n)\nAND message_keyword = 'RESULT' AND result_type = 'OK'\n",
+          "rawQuery": "SELECT   count() FROM default.messages WHERE message_date >= toDate(1590249330) AND toDateTime(message_time) >= toDateTime(1590249330)  AND test_id IN  (   SELECT DISTINCT test_id      FROM messages      WHERE test_istop = 1 AND message_keyword IN ('TEST', 'ATTRIBUTE') AND concat(attribute_name, ': ', attribute_value) IN ('name2: value2','job.id: 1234','build: 1234','build: 123','build: 10',': ')  ) AND test_id IN  (   SELECT DISTINCT test_id      FROM messages      WHERE test_istop = 1 AND message_keyword IN ('TEST', 'TAG') AND tag_value IN ('','tag0','tag1')  ) AND test_id IN  (   SELECT DISTINCT test_id      FROM messages      WHERE test_istop = 1 AND message_keyword IN ('TEST', 'REQUIREMENT') AND requirement_name IN ('','RQ1')  ) AND message_keyword = 'RESULT' AND result_type = 'OK'",
+          "refId": "A",
+          "round": "0s",
+          "table": "messages",
+          "tableLoading": false
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": null,
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 6,
+        "y": 3
+      },
+      "id": 6,
+      "links": [],
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "last"
+          ],
+          "defaults": {
+            "mappings": [
+              {
+                "$$hashKey": "object:142",
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "light-red",
+                  "value": null
+                }
+              ]
+            },
+            "title": "Fail",
+            "unit": "none"
+          },
+          "overrides": [],
+          "values": false
+        },
+        "orientation": "horizontal",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "6.7.0",
+      "targets": [
+        {
+          "database": "default",
+          "dateColDataType": "message_date",
+          "dateLoading": false,
+          "dateTimeColDataType": "toDateTime(message_time)",
+          "dateTimeType": "DATETIME",
+          "datetimeLoading": false,
+          "format": "table",
+          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+          "hide": false,
+          "intervalFactor": 1,
+          "query": "SELECT\n  count()\nFROM $table\nWHERE $timeFilter \nAND test_id IN \n(\n  SELECT DISTINCT test_id\n     FROM messages\n     WHERE test_istop = 1 AND message_keyword IN ('TEST', 'ATTRIBUTE') AND concat(attribute_name, ': ', attribute_value) IN ($attribute) \n)\nAND test_id IN \n(\n  SELECT DISTINCT test_id\n     FROM messages\n     WHERE test_istop = 1 AND message_keyword IN ('TEST', 'TAG') AND tag_value IN ($tag) \n)\nAND test_id IN \n(\n  SELECT DISTINCT test_id\n     FROM messages\n     WHERE test_istop = 1 AND message_keyword IN ('TEST', 'REQUIREMENT') AND requirement_name IN ($requirement) \n)\nAND message_keyword = 'RESULT' AND result_type = 'Fail'\n\n",
+          "rawQuery": "SELECT   count() FROM default.messages WHERE message_date >= toDate(1590249362) AND toDateTime(message_time) >= toDateTime(1590249362)  AND test_id IN  (   SELECT DISTINCT test_id      FROM messages      WHERE test_istop = 1 AND message_keyword IN ('TEST', 'ATTRIBUTE') AND concat(attribute_name, ': ', attribute_value) IN ('name2: value2','job.id: 1234','build: 1234','build: 123','build: 10',': ')  ) AND test_id IN  (   SELECT DISTINCT test_id      FROM messages      WHERE test_istop = 1 AND message_keyword IN ('TEST', 'TAG') AND tag_value IN ('','tag0','tag1')  ) AND test_id IN  (   SELECT DISTINCT test_id      FROM messages      WHERE test_istop = 1 AND message_keyword IN ('TEST', 'REQUIREMENT') AND requirement_name IN ('','RQ1')  ) AND message_keyword = 'RESULT' AND result_type = 'Fail'",
+          "refId": "A",
+          "round": "0s",
+          "table": "messages",
+          "tableLoading": false
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": null,
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 9,
+        "y": 3
+      },
+      "id": 7,
+      "links": [],
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "last"
+          ],
+          "defaults": {
+            "mappings": [
+              {
+                "$$hashKey": "object:142",
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "light-yellow",
+                  "value": null
+                }
+              ]
+            },
+            "title": "Error",
+            "unit": "none"
+          },
+          "overrides": [],
+          "values": false
+        },
+        "orientation": "horizontal",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "6.7.0",
+      "targets": [
+        {
+          "database": "default",
+          "dateColDataType": "message_date",
+          "dateLoading": false,
+          "dateTimeColDataType": "toDateTime(message_time)",
+          "dateTimeType": "DATETIME",
+          "datetimeLoading": false,
+          "format": "table",
+          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+          "hide": false,
+          "intervalFactor": 1,
+          "query": "SELECT\n  count()\nFROM $table\nWHERE $timeFilter \nAND test_id IN \n(\n  SELECT DISTINCT test_id\n     FROM messages\n     WHERE test_istop = 1 AND message_keyword IN ('TEST', 'ATTRIBUTE') AND concat(attribute_name, ': ', attribute_value) IN ($attribute) \n)\nAND test_id IN \n(\n  SELECT DISTINCT test_id\n     FROM messages\n     WHERE test_istop = 1 AND message_keyword IN ('TEST', 'TAG') AND tag_value IN ($tag) \n)\nAND test_id IN \n(\n  SELECT DISTINCT test_id\n     FROM messages\n     WHERE test_istop = 1 AND message_keyword IN ('TEST', 'REQUIREMENT') AND requirement_name IN ($requirement) \n)\nAND message_keyword = 'RESULT' AND result_type = 'Error'\n\n",
+          "rawQuery": "SELECT   count() FROM default.messages WHERE message_date >= toDate(1590249394) AND toDateTime(message_time) >= toDateTime(1590249394)  AND test_id IN  (   SELECT DISTINCT test_id      FROM messages      WHERE test_istop = 1 AND message_keyword IN ('TEST', 'ATTRIBUTE') AND concat(attribute_name, ': ', attribute_value) IN ('name2: value2','job.id: 1234','build: 1234','build: 123','build: 10',': ')  ) AND test_id IN  (   SELECT DISTINCT test_id      FROM messages      WHERE test_istop = 1 AND message_keyword IN ('TEST', 'TAG') AND tag_value IN ('','tag0','tag1')  ) AND test_id IN  (   SELECT DISTINCT test_id      FROM messages      WHERE test_istop = 1 AND message_keyword IN ('TEST', 'REQUIREMENT') AND requirement_name IN ('','RQ1')  ) AND message_keyword = 'RESULT' AND result_type = 'Error'",
+          "refId": "A",
+          "round": "0s",
+          "table": "messages",
+          "tableLoading": false
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": null,
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 12,
+        "y": 3
+      },
+      "id": 8,
+      "links": [],
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "last"
+          ],
+          "defaults": {
+            "mappings": [
+              {
+                "$$hashKey": "object:142",
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "light-blue",
+                  "value": null
+                }
+              ]
+            },
+            "title": "Known",
+            "unit": "none"
+          },
+          "overrides": [],
+          "values": false
+        },
+        "orientation": "horizontal",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "6.7.0",
+      "targets": [
+        {
+          "database": "default",
+          "dateColDataType": "message_date",
+          "dateLoading": false,
+          "dateTimeColDataType": "toDateTime(message_time)",
+          "dateTimeType": "DATETIME",
+          "datetimeLoading": false,
+          "format": "table",
+          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+          "hide": false,
+          "intervalFactor": 1,
+          "query": "SELECT\n  count()\nFROM $table\nWHERE $timeFilter \nAND test_id IN \n(\n  SELECT DISTINCT test_id\n     FROM messages\n     WHERE test_istop = 1 AND message_keyword IN ('TEST', 'ATTRIBUTE') AND concat(attribute_name, ': ', attribute_value) IN ($attribute) \n)\nAND test_id IN \n(\n  SELECT DISTINCT test_id\n     FROM messages\n     WHERE test_istop = 1 AND message_keyword IN ('TEST', 'TAG') AND tag_value IN ($tag) \n)\nAND test_id IN \n(\n  SELECT DISTINCT test_id\n     FROM messages\n     WHERE test_istop = 1 AND message_keyword IN ('TEST', 'REQUIREMENT') AND requirement_name IN ($requirement) \n)\nAND message_keyword = 'RESULT' AND result_type IN ('XOK', 'XFail', 'XError', 'XNull')\n",
+          "rawQuery": "SELECT   count() FROM default.messages WHERE message_date >= toDate(1590249426) AND toDateTime(message_time) >= toDateTime(1590249426)  AND test_id IN  (   SELECT DISTINCT test_id      FROM messages      WHERE test_istop = 1 AND message_keyword IN ('TEST', 'ATTRIBUTE') AND concat(attribute_name, ': ', attribute_value) IN ('name2: value2','job.id: 1234','build: 1234','build: 123','build: 10',': ')  ) AND test_id IN  (   SELECT DISTINCT test_id      FROM messages      WHERE test_istop = 1 AND message_keyword IN ('TEST', 'TAG') AND tag_value IN ('','tag0','tag1')  ) AND test_id IN  (   SELECT DISTINCT test_id      FROM messages      WHERE test_istop = 1 AND message_keyword IN ('TEST', 'REQUIREMENT') AND requirement_name IN ('','RQ1')  ) AND message_keyword = 'RESULT' AND result_type IN ('XOK', 'XFail', 'XError', 'XNull')",
+          "refId": "A",
+          "round": "0s",
+          "table": "messages",
+          "tableLoading": false
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": null,
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 15,
+        "y": 3
+      },
+      "id": 9,
+      "links": [],
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "last"
+          ],
+          "defaults": {
+            "mappings": [
+              {
+                "$$hashKey": "object:142",
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "rgb(77, 76, 79)",
+                  "value": null
+                }
+              ]
+            },
+            "title": "Other",
+            "unit": "none"
+          },
+          "overrides": [],
+          "values": false
+        },
+        "orientation": "horizontal",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "6.7.0",
+      "targets": [
+        {
+          "database": "default",
+          "dateColDataType": "message_date",
+          "dateLoading": false,
+          "dateTimeColDataType": "toDateTime(message_time)",
+          "dateTimeType": "DATETIME",
+          "datetimeLoading": false,
+          "format": "table",
+          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+          "hide": false,
+          "intervalFactor": 1,
+          "query": "SELECT\n  count()\nFROM $table\nWHERE $timeFilter \nAND test_id IN \n(\n  SELECT DISTINCT test_id\n     FROM messages\n     WHERE test_istop = 1 AND message_keyword IN ('TEST', 'ATTRIBUTE') AND concat(attribute_name, ': ', attribute_value) IN ($attribute) \n)\nAND test_id IN \n(\n  SELECT DISTINCT test_id\n     FROM messages\n     WHERE test_istop = 1 AND message_keyword IN ('TEST', 'TAG') AND tag_value IN ($tag) \n)\nAND test_id IN \n(\n  SELECT DISTINCT test_id\n     FROM messages\n     WHERE test_istop = 1 AND message_keyword IN ('TEST', 'REQUIREMENT') AND requirement_name IN ($requirement) \n)\nAND message_keyword = 'RESULT' AND result_type IN ('Null', 'Skip')\n",
+          "rawQuery": "SELECT    trim(LEADING '/' FROM anyIf(test_name, test_name != '')) AS name,    toUInt8(anyIf(result_type, result_type != '')) AS result,   max(message_rtime) AS duration,   toDateTime(min(message_time)) AS time,   any(test_id) AS id FROM messages  WHERE message_date >= toDate(1590249597) AND toDateTime(message_time) >= toDateTime(1590249597)  AND test_id IN  (   SELECT DISTINCT test_id      FROM messages      WHERE test_istop = 1 AND message_keyword IN ('TEST','ATTRIBUTE') AND concat(attribute_name, ': ', attribute_value) IN ('name2: value2','job.id: 1234','build: 1234','build: 123','build: 10',': ')   ) AND test_id IN (   SELECT DISTINCT test_id      FROM messages      WHERE test_istop = 1 AND message_keyword IN ('TEST','TAG') AND tag_value IN ('','tag0','tag1')   ) AND test_id IN (   SELECT DISTINCT test_id      FROM messages      WHERE test_istop = 1 AND message_keyword IN ('TEST','REQUIREMENT') AND requirement_name IN ('','RQ1')   ) GROUP BY test_key  ORDER BY time, test_key DESC",
+          "refId": "A",
+          "round": "0s",
+          "table": "messages",
+          "tableLoading": false
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 7
+      },
+      "id": 13,
+      "panels": [],
+      "title": "Test Runs",
+      "type": "row"
+    },
+    {
+      "columns": [],
+      "datasource": null,
+      "fontSize": "100%",
+      "gridPos": {
+        "h": 16,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 2,
+      "pageSize": null,
+      "showHeader": true,
+      "sort": {
+        "col": 3,
+        "desc": true
+      },
+      "styles": [
+        {
+          "$$hashKey": "object:919",
+          "alias": "Time",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "MM/DD/YY h:mm:ss a",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "time",
+          "thresholds": [],
+          "type": "date",
+          "unit": "short"
+        },
+        {
+          "$$hashKey": "object:920",
+          "alias": "",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "id",
+          "thresholds": [],
+          "type": "hidden",
+          "unit": "short"
+        },
+        {
+          "$$hashKey": "object:921",
+          "alias": "Name",
+          "align": "left",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "link": true,
+          "linkTooltip": "$__cell_0",
+          "linkUrl": "/d/oDIoHPkMk/test-run?orgId=1&var-test_id=$__cell_4",
+          "mappingType": 1,
+          "pattern": "name",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "$$hashKey": "object:922",
+          "alias": "Result",
+          "align": "center",
+          "colorMode": "cell",
+          "colors": [
+            "grey",
+            "green",
+            "red",
+            "yellow",
+            "cyan",
+            "grey",
+            "blue"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "result",
+          "preserveFormat": false,
+          "sanitize": true,
+          "thresholds": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "type": "string",
+          "unit": "short",
+          "valueMaps": [
+            {
+              "$$hashKey": "object:988",
+              "text": "OK",
+              "value": "1"
+            },
+            {
+              "$$hashKey": "object:989",
+              "text": "Fail",
+              "value": "2"
+            },
+            {
+              "$$hashKey": "object:990",
+              "text": "Error",
+              "value": "3"
+            },
+            {
+              "$$hashKey": "object:991",
+              "text": "Null",
+              "value": "4"
+            },
+            {
+              "$$hashKey": "object:992",
+              "text": "Skip",
+              "value": "5"
+            },
+            {
+              "$$hashKey": "object:993",
+              "text": "XOK",
+              "value": "6"
+            },
+            {
+              "$$hashKey": "object:994",
+              "text": "XFail",
+              "value": "7"
+            },
+            {
+              "$$hashKey": "object:995",
+              "text": "XError",
+              "value": "8"
+            },
+            {
+              "$$hashKey": "object:996",
+              "text": "XNull",
+              "value": "9"
+            }
+          ]
+        },
+        {
+          "$$hashKey": "object:1013",
+          "alias": "Duration",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "duration",
+          "thresholds": [],
+          "type": "number",
+          "unit": "s"
+        },
+        {
+          "$$hashKey": "object:862",
+          "alias": "",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "test_id_key",
+          "thresholds": [],
+          "type": "hidden",
+          "unit": "short"
+        },
+        {
+          "$$hashKey": "object:923",
+          "alias": "",
+          "align": "center",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "/.*/",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "database": "default",
+          "dateColDataType": "message_date",
+          "dateLoading": false,
+          "dateTimeColDataType": "toDateTime(message_time)",
+          "dateTimeType": "DATETIME",
+          "datetimeLoading": false,
+          "format": "table",
+          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+          "hide": false,
+          "intervalFactor": 1,
+          "query": "SELECT \n  trim(LEADING '/' FROM anyIf(test_name, test_name != '')) AS name, \n  toUInt8(anyIf(result_type, result_type != '')) AS result,\n  max(message_rtime) AS duration,\n  toDateTime(min(message_time)) AS time,\n  any(test_id) AS id\nFROM messages \nWHERE $timeFilter \nAND test_id IN \n(\n  SELECT DISTINCT test_id\n     FROM messages\n     WHERE test_istop = 1 AND message_keyword IN ('TEST','ATTRIBUTE') AND concat(attribute_name, ': ', attribute_value) IN ($attribute)  \n)\nAND test_id IN\n(\n  SELECT DISTINCT test_id\n     FROM messages\n     WHERE test_istop = 1 AND message_keyword IN ('TEST','TAG') AND tag_value IN ($tag)  \n)\nAND test_id IN\n(\n  SELECT DISTINCT test_id\n     FROM messages\n     WHERE test_istop = 1 AND message_keyword IN ('TEST','REQUIREMENT') AND requirement_name IN ($requirement)  \n)\nGROUP BY test_key \nORDER BY time, test_key DESC",
+          "rawQuery": "SELECT    trim(LEADING '/' FROM anyIf(test_name, test_name != '')) AS name,    toUInt8(anyIf(result_type, result_type != '')) AS result,   max(message_rtime) AS duration,   toDateTime(min(message_time)) AS time,   any(test_id) AS id FROM messages  WHERE message_date >= toDate(1590249267) AND toDateTime(message_time) >= toDateTime(1590249267)  AND test_id IN  (   SELECT DISTINCT test_id      FROM messages      WHERE test_istop = 1 AND message_keyword IN ('TEST','ATTRIBUTE') AND concat(attribute_name, ': ', attribute_value) IN ('name2: value2','job.id: 1234','build: 1234','build: 123','build: 10',': ')   ) AND test_id IN (   SELECT DISTINCT test_id      FROM messages      WHERE test_istop = 1 AND message_keyword IN ('TEST','TAG') AND tag_value IN ('','tag0','tag1')   ) AND test_id IN (   SELECT DISTINCT test_id      FROM messages      WHERE test_istop = 1 AND message_keyword IN ('TEST','REQUIREMENT') AND requirement_name IN ('','RQ1')   ) GROUP BY test_key  ORDER BY time, test_key DESC",
+          "refId": "A",
+          "round": "0s",
+          "table": "messages",
+          "tableLoading": false
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "transform": "table",
+      "transparent": true,
+      "type": "table"
+    }
+  ],
+  "schemaVersion": 22,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": "",
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "ClickHouse",
+        "definition": "SELECT DISTINCT concat(attribute_name,': ',attribute_value) AS attribute FROM default.messages WHERE test_istop = 1 AND message_keyword IN ('TEST', 'ATTRIBUTE')",
+        "hide": 0,
+        "includeAll": true,
+        "index": -1,
+        "label": "Attribute",
+        "multi": true,
+        "name": "attribute",
+        "options": [],
+        "query": "SELECT DISTINCT concat(attribute_name,': ',attribute_value) AS attribute FROM default.messages WHERE test_istop = 1 AND message_keyword IN ('TEST', 'ATTRIBUTE')",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 6,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "ClickHouse",
+        "definition": "SELECT DISTINCT tag_value AS tag FROM default.messages WHERE test_istop = 1 AND message_keyword IN ('TEST', 'TAG')",
+        "hide": 0,
+        "includeAll": true,
+        "index": -1,
+        "label": "Tag",
+        "multi": true,
+        "name": "tag",
+        "options": [],
+        "query": "SELECT DISTINCT tag_value AS tag FROM default.messages WHERE test_istop = 1 AND message_keyword IN ('TEST', 'TAG')",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "ClickHouse",
+        "definition": "SELECT DISTINCT requirement_name AS req FROM default.messages WHERE test_istop = 1 AND message_keyword IN ('TEST', 'REQUIREMENT')",
+        "hide": 0,
+        "includeAll": true,
+        "index": -1,
+        "label": "Requirement",
+        "multi": true,
+        "name": "requirement",
+        "options": [],
+        "query": "SELECT DISTINCT requirement_name AS req FROM default.messages WHERE test_istop = 1 AND message_keyword IN ('TEST', 'REQUIREMENT')",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "time": {
+    "from": "now-7d",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "",
+  "title": "Test Runs",
+  "uid": "Gor2rbzGk",
+  "variables": {
+    "list": []
+  },
+  "version": 31
+}
