@@ -17,7 +17,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 7,
-  "iteration": 1590867088835,
+  "iteration": 1590868415513,
   "links": [],
   "panels": [
     {
@@ -135,7 +135,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Test Attribute",
+      "title": "Attribute",
       "transform": "table",
       "transparent": true,
       "type": "table"
@@ -148,9 +148,9 @@
     "list": [
       {
         "current": {
-          "selected": true,
-          "text": "",
-          "value": ""
+          "selected": false,
+          "text": "none",
+          "value": "none"
         },
         "hide": 0,
         "label": "Name",
@@ -158,11 +158,11 @@
         "options": [
           {
             "selected": true,
-            "text": "",
-            "value": ""
+            "text": "none",
+            "value": "none"
           }
         ],
-        "query": "",
+        "query": "none",
         "skipUrlSync": false,
         "type": "textbox"
       }
@@ -192,5 +192,5 @@
   "variables": {
     "list": []
   },
-  "version": 7
+  "version": 9
 }
